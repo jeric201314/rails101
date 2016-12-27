@@ -13,8 +13,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
-
-  def create
+    def create
    @group = Group.new(group_params)
     @group.user = current_user
    if @group.save
@@ -24,21 +23,20 @@ class GroupsController < ApplicationController
     end
   end
 
+  def edit
+    end
+
     def update
-
-    if @group.update(group_params)
-
-    redirect_to groups_path, notice: "Update Success"
-  else
-    render :edit
-  end
-  end
+      if @group.update(group_params)
+        redirect_to groups_path, notice: "Update Success"
+      else
+        render :edit
+      end
+    end
 
     def destroy
-      
       @group.destroy
-      flash[:alert] = "Group deleted"
-      redirect_to groups_path
+      redirect_to groups_path, alert: "Group deleted"
     end
 
 
